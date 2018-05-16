@@ -1,13 +1,26 @@
 <?php $__env->startSection('content'); ?>
     <div class="container">
 <?php if(isset($number)): ?>
+    <div class="col-xs-12 " >
     <?php
     if($page==1){
-        echo "<h4>$number kết quả được tìm thấy trong $time s</h4>";
+
+        echo "<h4 >$number kết quả được tìm thấy trong $time s</h4>";
     }
 
     ?>
+    </div>
 <?php endif; ?>
+    <?php if(isset($spell) and $spell !=null and isset($page) and $page==1): ?>
+        <div class="col-xs-12 " style="margin-bottom:20px;">
+            <p><span class="search-title" style="font-size: 18px;color: #000000">Hiển thị kết quả cho <a href="<?php echo e(route('search',['q'=>$spell])); ?>" style="color: #1a0dab"><?php echo e($spell); ?></a></span>
+            <br>
+            <span class="search-title" style="font-size: 14px;color: #000000">
+                Tìm kiếm thay thế cho <a href="#" style="color: #1a0dab"><?php echo e($q); ?></a>
+            </span>
+            </p>
+        </div>
+    <?php endif; ?>
 <?php if(count($errors)>0): ?>
     <div class="alert-danger">
         <ul>
@@ -20,8 +33,7 @@
     <?php $__currentLoopData = $tintuc; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="col-xs-12 " style="margin-bottom:20px;" >
         <a href="<?php echo e($tt->url); ?>">   <span class="search-title" style="font-size: 18px;color: #1a0dab">
-                <?php echo e($tt->title); ?>
-
+                
                 <?php
                 if(isset($q)){
                 $title_highlight=str_replace($q,'<b>'.$q.'</b>',$tt->title);
@@ -29,7 +41,7 @@
                 $title_highlight=str_replace(strtoupper($q),'<b>'.strtoupper($q).'</b>',$title_highlight);
                 echo $title_highlight;
                 }else{
-                    echo $tt->title;
+                    //echo $tt->title;
                 }
                 ?>
             </span></a><br>
